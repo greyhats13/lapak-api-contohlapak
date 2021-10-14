@@ -73,7 +73,6 @@ podTemplate(
         stage('Deploy') {
             echo "Perform Helm Deploy..."
             container('helm') {
-               sh "rm -rf contohlapak"
                sh "helm lint -f ${helm_values}"
                sh "helm -n ${namespace} install ${service_name} -f ${helm_values} . --dry-run --debug"
                sh "helm -n ${namespace} upgrade --install ${service_name} -f ${helm_values} . --recreate-pods"
@@ -85,6 +84,7 @@ podTemplate(
 //function to perform docker build that is defined in dockerfile
 def dockerBuild(Map args) {
     sh "docker build -t ${args.docker_username}/${args.service_name}:${args.build_number} ."
+    sh "rm contohlapak"
 }
 
 def dockerPush(Map args) {
