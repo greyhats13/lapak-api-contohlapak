@@ -1,12 +1,18 @@
 #MySQL
-curl --location --request POST 'https://contohlapak.blast.co.id/db?key=name' \
+curl --location --request POST 'https://contohlapak.api.dev.blast.co.id/db?key=name' \
 --header 'Content-Type: application/json' \
 --data-raw '   {
      "name": "lapak05",
      "owner": "Zaky",
      "products_sold": 3
    }'
+
+curl --location --request GET 'https://contohlapak.api.dev.blast.co.id/db' \
+--data-raw ''
 #Cache
-curl --location --request POST 'https://contohlapak.blast.co.id/cache?key=name&value=lapak03' \
+curl --location --request POST 'https://contohlapak.api.dev.blast.co.id/cache?key=name&value=lapak03' \
 --header 'Content-Type: application/json' \
 --data-raw '{"status":"ok","lapaks":[{"name":"lapak01","owner":"budi","products_sold":10},{"name":"lapak04","owner":"imam","products_sold":16},{"name":"lapak03","owner":"azizan","products_sold":16}]}'
+
+curl --location --request GET 'https://contohlapak.api.dev.blast.co.id/cache/list' \
+--header 'Content-Type: application/json'
