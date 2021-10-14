@@ -1,0 +1,114 @@
+# Default values for balance.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+podAnnotations:
+  prometheus.io/scrape: "false"
+
+image:
+  repository: greyhats13/lapak-api-contohlapak:latest
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+appConfigMap:
+  MYSQL_ADDR: lapak-database-mysql.database.svc.cluster.local:3306
+  MYSQL_DB: contohlapak
+  MYSQL_USER: root
+  LISTEN_PORT: 9090
+  REDIS_ADDR: lapak-database-redis.database.svc.cluster.local:6379
+  MYSQL_ENABLED: true
+  REDIS_ENABLED: true
+  LOAD_BALANCED: false
+
+appSecret:
+  MYSQL_PASS: pass
+  MYSQL_ROOT_PASSWORD: pass
+
+service:
+  type: ClusterIP
+  port: 9090
+  dstPort: 9090
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-lapak
+    ingressClassName: nginx
+  hosts:
+    - host: contohlapak.api.blast.co.id
+      paths: []
+  tls:
+    - secretName: lapak-api-contohlapak-ssl
+      hosts:
+        - contohlapak.api.blast.co.id
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaller:
+  replicas:
+    min: 2
+    max: 20
+  utilization:
+    cpu: 75
+    memory: 75
+
+livenessProbe:
+  failureThreshold: 3
+  httpGet:
+    path: /healthz
+    port: 9090
+    scheme: HTTP
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 3
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+    # name: blast-sa
+    # namespace: blast
+    # secrets:
+    # - name: blast-secret
+
+# podSecurityContext: {}
+  # fsGroup: 2000
+
+# securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+    # kubernetes.io/tls-acme: "true"
+  # hosts:
+  #   - host: chart-example.local
+  #     paths: []
+  # tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+nodeSelector:
+  service: backend
+
+# tolerations: []
+
+# affinity: {}
