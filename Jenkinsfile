@@ -73,7 +73,7 @@ podTemplate(
         stage('Deploy') {
             echo "Perform Helm Deploy..."
             container('helm') {
-               sh "helm lint -f ${helm_values}"
+            //    sh "helm lint -f ${helm_values}"
                sh "helm -n ${namespace} install ${service_name} -f ${helm_values} . --dry-run --debug"
                sh "helm -n ${namespace} upgrade --install ${service_name} -f ${helm_values} . --recreate-pods"
             }
