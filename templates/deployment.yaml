@@ -4,12 +4,12 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "evm-core-api.labels" . | nindent 4 }}
+    {{- include "lapak-api-contohlapak.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "evm-core-api.selectorLabels" . | nindent 6 }}
+      {{- include "lapak-api-contohlapak.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
@@ -17,7 +17,7 @@ spec:
         {{ $key }}: {{ $value | quote }}
         {{- end }}
       labels:
-        {{- include "evm-core-api.selectorLabels" . | nindent 8 }}
+        {{- include "lapak-api-contohlapak.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
