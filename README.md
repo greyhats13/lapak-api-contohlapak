@@ -5,6 +5,9 @@ and the IP address 35.197.146.80 is pointed to contohlapak.blast.co.id.
 You can access the endpoint using https://contohlapak.blast.co.id/db
 without using port because it is proxied using Nginx
 
+Jenkins access:
+https://jenkins.blast.co.id/ user:admin pass:admin123
+
 ## Bash Script
 ```bash
 #!/bin/sh
