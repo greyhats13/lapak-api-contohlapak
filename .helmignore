@@ -20,3 +20,9 @@
 *.log
 contohlapak
 certbot/
+Dockerfile
+Dockerfile-nginx
+Jenkinsfile
+tables.sql
+bash.sh
+nginx/
