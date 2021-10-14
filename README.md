@@ -1,4 +1,10 @@
-##Answers
+Repo original assignment: https://github.com/greyhats13/contohlapak
+
+Repo kubernetes improvisation: https://github.com/greyhats13/lapak-api-contohlapak
+
+Repo Lapak infra: https://github.com/greyhats13/lapak-do-infra
+
+## Answers
 Everything is automated using bash.sh
 Contohlapak is open on port 9090 with MySQL Redis and LoadBalanced Enabled using nginx
 and the IP address 35.197.146.80 is pointed to contohlapak.blast.co.id.
