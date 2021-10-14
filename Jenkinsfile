@@ -75,8 +75,8 @@ podTemplate(
             sh "rm contohlapak"
             container('helm') {
                sh "helm lint -f helm/${helm_values}"
-               sh "helm -n ${namespace} install ${service_name} -f helm/{helm_values} . --dry-run --debug"
-               sh "helm -n ${namespace} upgrade --install ${service_name} -f helm/${helm_values} . --recreate-pods"
+               sh "helm -n ${namespace} install ${service_name} -f helm/{helm_values} helm/ --dry-run --debug"
+               sh "helm -n ${namespace} upgrade --install ${service_name} -f helm/${helm_values} helm/ --recreate-pods"
             }
         }
     }
