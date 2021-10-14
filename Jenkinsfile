@@ -72,7 +72,6 @@ podTemplate(
 
         stage('Deploy') {
             echo "Perform Helm Deploy..."
-            sh "rm -rf contohlapak"
             container('helm') {
                sh "helm lint -f ${helm_values}"
                sh "helm -n ${namespace} install ${service_name} -f ${helm_values} . --dry-run --debug"
@@ -90,11 +89,9 @@ def dockerBuild(Map args) {
 
 def dockerPush(Map args) {
     sh "docker push ${args.docker_username}/${args.service_name}:${args.build_number}"
-    sh "rm contohlapak"
 }
 
 def dockerPushTag(Map args) {
     sh "docker tag ${args.docker_username}/${args.service_name}:${args.build_number} ${args.docker_username}/${args.service_name}:${args.version}"
     sh "docker push ${args.docker_username}/${args.service_name}:${args.version}"
-    sh "rm -rf contohlapak"
 }
