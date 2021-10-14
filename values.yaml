@@ -13,7 +13,7 @@ image:
 
 nameOverride: ""
 fullnameOverride: ""
-appConfigMap:
+appConfig:
   MYSQL_ADDR: lapak-database-mysql.database.svc.cluster.local:3306
   MYSQL_DB: contohlapak
   MYSQL_USER: root
